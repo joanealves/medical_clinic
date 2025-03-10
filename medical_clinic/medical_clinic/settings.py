@@ -1,4 +1,11 @@
-# medical_clinic/settings.py
+import environ
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -30,14 +37,16 @@ MIDDLEWARE = [
 ]
 
 # Configuração do MySQL
+# Inicializar django-environ
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'medical_clinic',
-        'USER': 'root', 
-        'PASSWORD': '101023',  
-        'HOST': 'localhost',
-        'PORT': '3307', 
+        'NAME': env('DB_NAME', default='medical_clinic'),
+        'USER': env('DB_USER', default='root'),
+        'PASSWORD': env('DB_PASSWORD', default=''),
+        'HOST': env('DB_HOST', default='localhost'),
+        'PORT': env('DB_PORT', default='3307'),
     }
 }
 

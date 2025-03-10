@@ -1,4 +1,3 @@
-# medical_records/serializers.py
 from rest_framework import serializers
 from .models import MedicalRecord, Prescription, ExamRequest
 from patients.serializers import PatientSerializer
